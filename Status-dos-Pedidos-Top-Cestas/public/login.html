@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Top Cestas Track</title>
+    <link rel="icon" href="https://tutoriaissankhya.netlify.app/img/IcoTop.png" type="image/png">
+    <link rel="stylesheet" href="Styles/gerador.css">
+
+    <style>
+      .containerlogin {
+        width: 40%;
+        margin: 40px auto;
+        background: white;
+        border-radius: 14px;
+        padding: 30px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-left">
+        <a href="https://topalimentos.shop/produtos/">
+          <img src="https://acdn.mitiendanube.com/stores/005/153/537/themes/common/logo-1763652655-1725039982-7ed6073ae2f21d42c151cd86c3596fe41725039982.png?0" alt="Logo Top Cestas" width="20%" height="auto">
+        </a>
+        <h1>Top Cestas</h1>
+        <span>Acesso Administrativo - Gerador de Links de Rastreamento de pedidos - v1.6.2</span>
+      </div>
+    </header>
+
+    <div class="containerlogin">
+      <div class="descricao">
+        <p class="highlight2">Usuário e senha do Sankhya</p>
+      </div>
+
+      <input type="text" id="usuario" placeholder="Usuário Sankhya" autocomplete="username">
+      <input type="password" id="senha" placeholder="Senha Sankhya" autocomplete="current-password">
+
+      <div class="acoes">
+        <button class="btn-gerar" id="btnEntrar" onclick="loginAdmin()"> Entrar </button>
+      </div>
+
+      <div class="resultado" id="status"></div>
+    </div>
+
+    <footer>Top Cestas Track © 2026 - Sistema de rastreamento integrado Sankhya ERP</footer>
+
+    <script>
+      const usuarioInput = document.getElementById('usuario');
+      const senhaInput = document.getElementById('senha');
+      const statusDiv = document.getElementById('status');
+      const btnEntrar = document.getElementById('btnEntrar');
+
+      let loginEmProcessamento = false;
+
+      function setStatusLogin(mensagem, tipo) {
+        const cor = tipo === 'ok' ? 'green' : tipo === 'warn' ? '#8a5a00' : 'red';
+        statusDiv.innerHTML = `<p style="color:${cor}">${mensagem}</p>`;
+      }
+
+      function bloquearFormulario(bloquear) {
+        usuarioInput.disabled = bloquear;
+        senhaInput.disabled = bloquear;
+        btnEntrar.disabled = bloquear;
+        btnEntrar.innerText = bloquear ? 'Validando...' : ' Entrar ';
+      }
+
+      async function verificarSessaoExistente() {
+        try {
+          const response = await fetch('/api/admin-status');
+
+          if (response.ok) {
+            window.location.href = '/gerador.html';
+          }
+        } catch (err) {
+          console.warn('Sessão administrativa não encontrada.');
+        }
+      }
+
+      async function loginAdmin() {
+        if (loginEmProcessamento) {
+          return;
+        }
+
+        const usuario = usuarioInput.value.trim();
+        const senha = senhaInput.value.trim();
+
+        if (!usuario || !senha) {
+          setStatusLogin('Informe usuário e senha.', 'erro');
+          senhaInput.value = '';
+          usuarioInput.focus();
+          return;
+        }
+
+        loginEmProcessamento = true;
+        bloquearFormulario(true);
+        setStatusLogin('Validando acesso...', 'warn');
+
+        try {
+          const response = await fetch('/api/admin-login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              usuario,
+              senha
+            })
+          });
+
+          let json = {};
+
+          try {
+            json = await response.json();
+          } catch {
+            json = {};
+          }
+
+          if (!response.ok || !json.ok) {
+            setStatusLogin(json.erro || 'Usuário ou senha inválidos.', 'erro');
+            senhaInput.value = '';
+            bloquearFormulario(false);
+
+            if (response.status === 429) {
+              usuarioInput.focus();
+            } else {
+              senhaInput.focus();
+            }
+
+            loginEmProcessamento = false;
+            return;
+          }
+
+          setStatusLogin('Acesso liberado. Redirecionando...', 'ok');
+
+          window.location.href = '/gerador.html';
+
+        } catch (err) {
+          setStatusLogin(err.message || 'Erro ao validar acesso.', 'erro');
+          senhaInput.value = '';
+          bloquearFormulario(false);
+          senhaInput.focus();
+          loginEmProcessamento = false;
+        }
+      }
+
+      usuarioInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          senhaInput.focus();
+        }
+      });
+
+      senhaInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          loginAdmin();
+        }
+      });
+
+      verificarSessaoExistente();
+      usuarioInput.focus();
+    </script>
+  </body>
+</html>
