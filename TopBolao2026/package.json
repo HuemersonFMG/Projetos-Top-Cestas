@@ -1,0 +1,19 @@
+{
+    "name": "top-bolao-2026",
+    "version": "1.0.0",
+    "description": "Top Bolão Copa do Mundo FIFA 2026",
+    "main": "server.js",
+    "author": "Huemerson Leonardo Garcia",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+      "start": "node server.js",
+      "dev": "node server.js"
+    },
+    "dependencies": {
+      "axios": "^1.11.0",
+      "cors": "^2.8.5",
+      "dotenv": "^17.2.2",
+      "express": "^4.21.2"
+    }
+  }

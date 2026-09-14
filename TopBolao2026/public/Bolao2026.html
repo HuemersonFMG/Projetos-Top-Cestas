@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Bolão Copa 2026</title>
+
+    <link rel="stylesheet" href="css/bolao.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="topo-bolao">
+            <a href="/" class="logo-area">
+                <span class="logo-top"><img src="https://copa.topstatus.online/img/logotopdourada.png" alt="Copa 2026 Top Cestas" width="80%" height="automatico"></span>
+                <span class="logo-texto">Bolão Copa 2026</span>
+            </a>
+
+            <nav class="menu-bolao">
+                <a href="#participar">Participar</a>
+                <a href="#jogos">Jogos</a>
+                <a href="#ranking">Ranking</a>
+                <a href="#regras">Regras</a>
+            </nav>
+        </header>
+
+        <section class="chamada-bolao">
+            <p>
+                A Copa de 2026 é a maior da história:
+                <strong>48 seleções</strong>,
+                <strong>104 jogos</strong>,
+                <strong>39 dias de futebol</strong>
+                espalhados por três países. É muito jogo pra acompanhar só torcendo.
+                Num bolão da Copa, cada partida vira disputa, cada placar decide ponto.
+            </p>
+        </section>
+
+        <main>
+
+            <section class="hero-bolao">
+                <div class="hero-imagem">
+                    <img src="https://copa.topstatus.online/img/logotopdourada.png" alt="Copa 2026 Top Cestas">
+                </div>
+
+                <div class="hero-conteudo">
+                    <span class="tag-bolao">🎯 Top Cestas de Alimentos</span>
+
+                    <h1>Top Bolão Copa 2026</h1>
+
+                    <p>
+                        Faça seus palpites, acompanhe os jogos da Copa e dispute
+                        o ranking com outros participantes.
+                    </p>
+
+                    <div class="acoes-hero">
+                        <a href="#participar" class="btn-principal">Entrar no Bolão</a>
+                        <a href="#ranking" class="btn-secundario">Ver Ranking</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cards-resumo">
+                <article class="card-info">
+                    <h3>⚽ Palpites</h3>
+                    <p>Escolha o jogo e informe o placar que você acredita.</p>
+                </article>
+
+                <article class="card-info">
+                    <h3>🏆 Pontuação</h3>
+                    <p>Ganhe pontos por placar exato, vencedor ou gols acertados.</p>
+                </article>
+
+                <article class="card-info">
+                    <h3>📊 Ranking</h3>
+                    <p>Acompanhe sua posição conforme os resultados forem atualizados.</p>
+                </article>
+            </section>
+
+            <section id="participar" class="section-bolao">
+                <div class="section-header">
+                    <h2>📝 Participar do Bolão</h2>
+                    <p>Informe seus dados para registrar seus palpites.</p>
+                </div>
+
+                <form id="formParticipante" class="form-bolao">
+                    <div class="campo">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefone">Telefone ou WhatsApp</label>
+                        <input type="text" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+                    </div>
+
+                    <div class="campo-check">
+                        <input type="checkbox" id="aceite" required>
+                        <label for="aceite">Li e aceito as regras do bolão.</label>
+                    </div>
+
+                    <button type="submit" class="btn-principal">Salvar Participante</button>
+                </form>
+            </section>
+
+            <section id="jogos" class="section-bolao">
+                <div class="section-header">
+                    <h2>⚽ Jogos para Palpite</h2>
+                    <p>Os jogos disponíveis aparecerão aqui.</p>
+                </div>
+
+                <div id="listaJogos" class="lista-jogos">
+                    <div class="aviso">
+                        Carregando jogos do bolão...
+                    </div>
+                </div>
+            </section>
+
+            <section id="ranking" class="section-bolao">
+                <div class="section-header">
+                    <h2>🏆 Ranking</h2>
+                    <p>Classificação geral dos participantes.</p>
+                </div>
+
+                <div class="ranking-container">
+                    <table class="tabela-ranking">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Participante</th>
+                                <th>Palpites</th>
+                                <th>Acertos</th>
+                                <th>Placares Exatos</th>
+                                <th>Pontos</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tbodyRanking"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="regras" class="section-bolao">
+                <div class="section-header">
+                    <h2>📋 Regras do Bolão</h2>
+                    <p>Pontuação inicial sugerida para o bolão.</p>
+                </div>
+
+                <div class="regras-grid">
+                    <div class="regra-card">
+                        <strong>10 pontos</strong>
+                        <span>Acertou o placar exato.</span>
+                    </div>
+
+                    <div class="regra-card">
+                        <strong>5 pontos</strong>
+                        <span>Acertou o vencedor ou empate.</span>
+                    </div>
+
+                    <div class="regra-card">
+                        <strong>2 pontos</strong>
+                        <span>Acertou os gols de uma seleção.</span>
+                    </div>
+
+                    <div class="regra-card">
+                        <strong>0 pontos</strong>
+                        <span>Não acertou o resultado.</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <div>Top Cestas de Alimentos</div>
+            <div>Top Bolão Copa 2026</div>
+            <div>Ambiente de desenvolvimento: http://localhost:5052/Bolao2026.html</div>
+        </footer>
+
+    </div>
+
+    <button type="button" id="btnVoltarTopo" class="btn-voltar-topo">↑</button>
+
+    <script src="js/bolao.js?v=20260626-1"></script>
+</body>
+</html>
